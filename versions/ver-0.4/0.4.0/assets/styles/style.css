@@ -1,0 +1,554 @@
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+      background: #1e1e1e;
+      color: #d4d4d4;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .ide {
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      direction: ltr;
+      text-align: left;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      font-family: "Segoe UI", system-ui, sans-serif;
+    }
+
+    .topbar,
+    .statusbar {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      flex-shrink: 0;
+      direction: ltr;
+    }
+
+    .topbar {
+      min-height: 3rem;
+      padding: 0.5rem 0.75rem;
+      background: #252526;
+      border-bottom: 1px solid #3c3c3c;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+    .mark {
+      width: 0.75rem;
+      height: 0.75rem;
+      border-radius: 2px;
+      background: #007acc;
+      box-shadow: 0.45rem 0.45rem 0 0 #6eb6e0;
+    }
+
+    .badge {
+      color: #fff;
+      background: #007acc;
+      border-radius: 0.375rem;
+      padding: 0.25rem 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .lang {
+      margin-left: auto;
+      min-height: 2.75rem;
+      color: #d4d4d4;
+      background: #1e1e1e;
+      border: 1px solid #3c3c3c;
+      border-radius: 0.375rem;
+      padding: 0 0.75rem;
+      font-size: 0.75rem;
+    }
+
+    .tabbar {
+      display: flex;
+      align-items: stretch;
+      background: #252526;
+      border-bottom: 1px solid #3c3c3c;
+      direction: ltr;
+      min-height: 2.75rem;
+    }
+
+    .tabs {
+      display: flex;
+      flex: 1;
+      min-width: 0;
+      overflow-x: auto;
+    }
+
+    .tab {
+      display: flex;
+      align-items: center;
+      flex: none;
+      color: #858585;
+      background: #252526;
+      border-right: 1px solid #3c3c3c;
+    }
+
+    .tab.active {
+      color: #d4d4d4;
+      background: #1e1e1e;
+      box-shadow: inset 0 2px 0 #007acc;
+    }
+
+    .tab-name,
+    .tab-close,
+    .tab-add {
+      border: 0;
+      background: transparent;
+      color: inherit;
+      min-height: 2.75rem;
+    }
+
+    .tab-name {
+      padding: 0 0.35rem 0 0.9rem;
+      text-align: left;
+    }
+
+    .tab-close {
+      padding: 0 0.75rem;
+      font-size: 1.15rem;
+      line-height: 1;
+    }
+
+    .tab-add {
+      flex: none;
+      padding: 0 1rem;
+      color: #d4d4d4;
+      font-size: 1.25rem;
+    }
+
+    .editor-scroll {
+      flex: 1;
+      overflow: auto;
+      direction: ltr;
+      text-align: left;
+      position: relative;
+    }
+
+    .editor-sheet {
+      display: flex;
+      align-items: flex-start;
+      min-width: 100%;
+      min-height: 100%;
+      direction: ltr;
+    }
+
+    .gutter {
+      position: sticky;
+      left: 0;
+      z-index: 2;
+      flex: none;
+      align-self: stretch;
+      padding: 0.75rem 0.75rem 2rem;
+      text-align: right;
+      user-select: none;
+      -webkit-user-select: none;
+      pointer-events: none;
+      background: #252526;
+      color: #858585;
+      border-right: 1px solid #3c3c3c;
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 0.875rem;
+    }
+
+    .ln,
+    .code-line {
+      height: 1.5rem;
+      line-height: 1.5rem;
+      font-size: 0.875rem;
+      font-family: ui-monospace, Consolas, monospace;
+    }
+
+    .code-col {
+      position: relative;
+      flex: 1 0 auto;
+      min-width: 0;
+      min-height: 100%;
+    }
+
+    .hl,
+    .ta {
+      margin: 0;
+      padding: 0.75rem 1rem 2rem;
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      tab-size: 2;
+      white-space: pre;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .hl {
+      min-height: 100%;
+      pointer-events: none;
+      color: #d4d4d4;
+    }
+
+    .code-line {
+      width: max-content;
+      min-width: 100%;
+      white-space: pre;
+    }
+
+    .ta {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      resize: none;
+      border: 0;
+      outline: none;
+      overflow: hidden;
+      background: transparent;
+      color: transparent;
+      caret-color: #d4d4d4;
+    }
+
+    .ta::selection {
+      background: rgba(0, 122, 204, 0.4);
+      color: transparent;
+    }
+
+    .statusbar {
+      min-height: 1.75rem;
+      padding: 0.25rem 0.75rem;
+      background: #007acc;
+      color: #fff;
+      font-size: 0.75rem;
+    }
+
+    .statusbar .spacer {
+      flex: 1;
+    }
+
+    .tok-keyword {
+      color: #569cd6;
+    }
+
+    .tok-string {
+      color: #ce9178;
+    }
+
+    .tok-comment {
+      color: #6a9955;
+    }
+
+    .tok-number {
+      color: #b5cea8;
+    }
+
+    .tok-tag {
+      color: #4ec9b0;
+    }
+
+    .tok-attr {
+      color: #9cdcfe;
+    }
+
+    .logo-header {
+      width: 20px;
+      height: 20px;
+      filter: brightness(0) invert(1);
+    }
+
+    /* ---------- Autocomplete ---------- */
+    .autocomplete {
+      position: absolute;
+      z-index: 20;
+      min-width: 180px;
+      max-height: 220px;
+      overflow-y: auto;
+      background: #252526;
+      border: 1px solid #3c3c3c;
+      border-radius: 0.25rem;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.55);
+      font-family: ui-monospace, Consolas, monospace;
+      font-size: 0.8125rem;
+      display: none;
+      padding: 0.25rem 0;
+    }
+
+    .autocomplete.open {
+      display: block;
+    }
+
+    .ac-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding: 0.3rem 0.75rem;
+      color: #d4d4d4;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .ac-item.active,
+    .ac-item:hover {
+      background: #094771;
+      color: #fff;
+    }
+
+    .ac-item .ac-kind {
+      color: #858585;
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .ac-item.active .ac-kind {
+      color: #cfcfcf;
+    }
+
+    .ac-item .ac-match {
+      color: #6eb6e0;
+      font-weight: 700;
+    }
+
+    .ac-item.active .ac-match {
+      color: #9cdcfe;
+    }
+
+    /* ---------- Dictionary modal ---------- */
+    .dict-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      background: rgba(0, 0, 0, 0.55);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .dict-overlay.open {
+      display: flex;
+    }
+
+    .dict-modal {
+      width: min(560px, 100%);
+      max-height: 85dvh;
+      display: flex;
+      flex-direction: column;
+      background: #252526;
+      color: #d4d4d4;
+      border: 1px solid #3c3c3c;
+      border-radius: 0.5rem;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+      font-family: "Segoe UI", system-ui, sans-serif;
+      overflow: hidden;
+    }
+
+    .dict-head {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1rem;
+      background: #2d2d30;
+      border-bottom: 1px solid #3c3c3c;
+    }
+
+    .dict-head h2 {
+      margin: 0;
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .dict-head .dict-close {
+      margin-left: auto;
+      border: 0;
+      background: transparent;
+      color: #d4d4d4;
+      font-size: 1.25rem;
+      line-height: 1;
+      padding: 0.25rem 0.5rem;
+      border-radius: 0.25rem;
+    }
+
+    .dict-head .dict-close:hover {
+      background: #3c3c3c;
+    }
+
+    .dict-body {
+      padding: 1rem;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .dict-field {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+
+    .dict-field label {
+      font-size: 0.75rem;
+      color: #9d9d9d;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .dict-field input,
+    .dict-field select,
+    .dict-field textarea {
+      font: inherit;
+      font-size: 0.875rem;
+      background: #1e1e1e;
+      color: #d4d4d4;
+      border: 1px solid #3c3c3c;
+      border-radius: 0.375rem;
+      padding: 0.5rem 0.65rem;
+      outline: none;
+    }
+
+    .dict-field textarea {
+      resize: vertical;
+      min-height: 5rem;
+      font-family: ui-monospace, Consolas, monospace;
+    }
+
+    .dict-field input:focus,
+    .dict-field select:focus,
+    .dict-field textarea:focus {
+      border-color: #007acc;
+    }
+
+    .dict-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    .dict-btn {
+      border: 0;
+      border-radius: 0.375rem;
+      padding: 0.5rem 0.9rem;
+      font-size: 0.8125rem;
+      font-weight: 600;
+      color: #fff;
+      background: #007acc;
+    }
+
+    .dict-btn:hover {
+      background: #1a86d4;
+    }
+
+    .dict-btn.secondary {
+      background: #3c3c3c;
+      color: #d4d4d4;
+    }
+
+    .dict-btn.secondary:hover {
+      background: #4a4a4a;
+    }
+
+    .dict-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      border-top: 1px solid #3c3c3c;
+      padding-top: 0.75rem;
+    }
+
+    .dict-list-title {
+      font-size: 0.75rem;
+      color: #9d9d9d;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .dict-empty {
+      color: #6b6b6b;
+      font-size: 0.8125rem;
+      font-style: italic;
+    }
+
+    .dict-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-radius: 0.375rem;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.8125rem;
+    }
+
+    .dict-row .dict-row-label {
+      flex: 1;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-family: ui-monospace, Consolas, monospace;
+    }
+
+    .dict-row .dict-row-kind {
+      font-size: 0.6875rem;
+      text-transform: uppercase;
+      color: #858585;
+      background: #2d2d30;
+      padding: 0.15rem 0.4rem;
+      border-radius: 0.25rem;
+    }
+
+    .dict-row .dict-row-del {
+      border: 0;
+      background: transparent;
+      color: #f48771;
+      font-size: 1.05rem;
+      line-height: 1;
+      padding: 0.15rem 0.35rem;
+      border-radius: 0.25rem;
+    }
+
+    .dict-row .dict-row-del:hover {
+      background: #3c2020;
+    }
+
+    .dict-toast {
+      position: fixed;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #007acc;
+      color: #fff;
+      padding: 0.5rem 0.9rem;
+      border-radius: 0.375rem;
+      font-size: 0.8125rem;
+      z-index: 60;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .dict-toast.show {
+      opacity: 1;
+    }
