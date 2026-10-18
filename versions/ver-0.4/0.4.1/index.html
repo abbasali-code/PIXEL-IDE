@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PIXEL IDE v0.4.1</title>
+  <link rel="stylesheet" href="assets/styles/styles.css">
+</head>
+
+<body>
+  <div class="ide">
+    <header class="topbar">
+      <div class="brand">
+        <img class="logo-header" id="logo" src="assets/icons/logo.svg" alt="">
+        <h1>PIXEL IDE</h1>
+        <span class="badge">v0.4.1</span>
+      </div>
+      <select id="language" class="lang" aria-label="Language">
+        <option value="javascript">JavaScript</option>
+        <option value="html">HTML</option>
+        <option value="css">CSS</option>
+        <option value="python">Python</option>
+        <option value="java">Java</option>
+        <option value="cpp">C++</option>
+        <option value="text">Plain text</option>
+      </select>
+      <button type="button" id="open-dict" class="dict-btn secondary" title="Upgrade Dictionary">⚙ Dictionary</button>
+    </header>
+    <div class="tabbar">
+      <div class="tabs" id="tabs"></div>
+      <button type="button" id="add-tab" class="tab-add" aria-label="New tab">+</button>
+    </div>
+    <div class="editor-scroll" id="scroll">
+      <div class="editor-sheet">
+        <div class="gutter" id="gutter" aria-hidden="true"></div>
+        <div class="code-col" id="code-col">
+          <div class="hl" id="hl" aria-hidden="true"></div>
+          <textarea id="editor" class="ta" dir="ltr" spellcheck="false" autocapitalize="off" autocorrect="off"
+            aria-label="Code editor"></textarea>
+          <div class="autocomplete" id="autocomplete" role="listbox" aria-label="Suggestions"></div>
+        </div>
+      </div>
+    </div>
+    <footer class="statusbar">
+      <span>PIXEL IDE</span>
+      <span class="spacer"></span>
+      <span id="status-info">Ln 1, Col 1</span>
+      <span>v0.4.1</span>
+    </footer>
+  </div>
+
+  <div class="dict-overlay" id="dict-overlay" role="dialog" aria-modal="true" aria-labelledby="dict-title">
+    <div class="dict-modal">
+      <div class="dict-head">
+        <h2 id="dict-title">⚙ Upgrade Dictionary</h2>
+        <button type="button" class="dict-close" id="dict-close" aria-label="Close">×</button>
+      </div>
+      <div class="dict-body">
+        <div class="dict-field">
+          <label for="dict-lang">Language</label>
+          <select id="dict-lang">
+            <option value="javascript">JavaScript</option>
+            <option value="html">HTML</option>
+            <option value="css">CSS</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+            <option value="cpp">C++</option>
+            <option value="text">Plain text</option>
+          </select>
+        </div>
+        <div class="dict-field">
+          <label for="dict-label">Command / word</label>
+          <input id="dict-label" type="text" placeholder="e.g. console.log or myFunc" autocomplete="off">
+        </div>
+        <div class="dict-field">
+          <label for="dict-kind">Kind</label>
+          <select id="dict-kind">
+            <option value="keyword">keyword</option>
+            <option value="builtin">builtin</option>
+            <option value="method">method</option>
+            <option value="tag">tag (HTML)</option>
+            <option value="attr">attr (HTML)</option>
+            <option value="property">property (CSS)</option>
+            <option value="value">value (CSS)</option>
+            <option value="snippet">snippet (inserts body)</option>
+          </select>
+        </div>
+        <div class="dict-field" id="dict-insert-wrap" style="display:none">
+          <label for="dict-insert">Insert body (for snippet)</label>
+          <textarea id="dict-insert" placeholder="e.g. function name() {&#10;  &#10;}"></textarea>
+        </div>
+        <div class="dict-actions">
+          <button type="button" class="dict-btn" id="dict-add">Add</button>
+          <button type="button" class="dict-btn secondary" id="dict-cancel">Cancel</button>
+        </div>
+        <div class="dict-list">
+          <div class="dict-list-title">Custom entries for this language</div>
+          <div id="dict-items"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="dict-toast" id="dict-toast"></div>
+
+  <script src="assets/scripts/app.js"></script>
+</body>
+
+</html>
